@@ -1,0 +1,22 @@
+
+
+.left-pane {
+  background: linear-gradient(225deg, #EAFFC2 0%, #FFD4F6 100%);
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+
+.left-text { 
+    background-image: linear-gradient(180deg, #F0C469 0%, #783C91 100%);
+  
+}
+
+.input-area{
+    border-color: rgba(120, 60, 145, 1);
+}
+
+.signup-button{
+     color: rgba(120, 60, 145, 1);
+    border-color: rgba(120, 60, 145, 1);
+}
