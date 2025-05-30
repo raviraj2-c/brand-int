@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Gordon Ramsay",
+    "isTopCreator": true,
+    "rating": 4.9,
+    "image": "/photo-brand/1.jpg",
+    "avatar": "/photo-brand/profile/1.jpg",
+    "tags": ["Cooking", "Unfiltered", "Roastmaster", "Gourmet", "Placeholder"],
+    "socials": [
+      { "icon": "SiX", "bgColor": "#000000", "color": "#ffffff", "followers": 1.2 },
+      { "icon": "SiYoutube", "bgColor": "#FF0000", "color": "#ffffff", "followers": 1.2 },
+      { "icon": "SiFacebook", "bgColor": "#1877F2", "color": "#ffffff", "followers": 1.2 },
+      { "icon": "SiInstagram", "bgColor": "#E1306C", "color": "#ffffff", "followers": 1.2 },
+      { "icon": "SiTiktok", "bgColor": "#000000", "color": "#ffffff", "followers": 1.2 }
+    ]
+  },
+  {
+    "name": "Emma Chamberlain",
+    "isTopCreator": true,
+    "rating": 4.8,
+    "image": "/photo-brand/2.jpg",
+    "avatar": "/photo-brand/profile/2.jpg",
+    "tags": ["Lifestyle", "Vlogs", "Coffee", "Fashion", "Comedian"],
+    "socials": [
+      { "icon": "SiYoutube", "bgColor": "#FF0000", "color": "#ffffff", "followers": 11.3 },
+      { "icon": "SiInstagram", "bgColor": "#E1306C", "color": "#ffffff", "followers": 12.5 },
+      { "icon": "SiTiktok", "bgColor": "#000000", "color": "#ffffff", "followers": 7.8 },
+      { "icon": "SiFacebook", "bgColor": "#1877F2", "color": "#ffffff", "followers": 1.9 }
+    ]
+  },
+  {
+    "name": "MrBeast",
+    "isTopCreator": true,
+    "rating": 5.0,
+     "image": "/photo-brand/3.jpg",
+    "avatar": "/photo-brand/profile/3.jpg",
+    "tags": ["Challenges", "Philanthropy", "Giveaways", "Entertainment", "YouTube King"],
+    "socials": [
+      { "icon": "SiYoutube", "bgColor": "#FF0000", "color": "#ffffff", "followers": 150 },
+      { "icon": "SiX", "bgColor": "#000000", "color": "#ffffff", "followers": 25 },
+      { "icon": "SiTiktok", "bgColor": "#000000", "color": "#ffffff", "followers": 40 },
+      { "icon": "SiInstagram", "bgColor": "#E1306C", "color": "#ffffff", "followers": 36 }
+    ]
+  },
+  {
+    "name": "Marques Brownlee",
+    "isTopCreator": true,
+    "rating": 4.9,
+  "image": "/photo-brand/4.jpg",
+    "avatar": "/photo-brand/profile/4.jpg",
+    "tags": ["Tech", "Reviews", "Gadgets", "Crisp", "Professional"],
+    "socials": [
+      { "icon": "SiYoutube", "bgColor": "#FF0000", "color": "#ffffff", "followers": 18 },
+      { "icon": "SiX", "bgColor": "#000000", "color": "#ffffff", "followers": 6.2 },
+      { "icon": "SiInstagram", "bgColor": "#E1306C", "color": "#ffffff", "followers": 4.3 },
+      { "icon": "SiFacebook", "bgColor": "#1877F2", "color": "#ffffff", "followers": 1.1 }
+    ]
+  },
+  {
+    "name": "Khaby Lame",
+    "isTopCreator": false,
+    "rating": 4.7,
+ "image": "/photo-brand/5.jpg",
+    "avatar": "/photo-brand/profile/5.jpg",
+    "tags": ["Comedy", "Silent Humor", "Tiktok Star", "Reactions", "Memes"],
+    "socials": [
+      { "icon": "SiTiktok", "bgColor": "#000000", "color": "#ffffff", "followers": 160 },
+      { "icon": "SiInstagram", "bgColor": "#E1306C", "color": "#ffffff", "followers": 80 },
+      { "icon": "SiX", "bgColor": "#000000", "color": "#ffffff", "followers": 5.5 }
+    ]
+  },
+  {
+    "name": "Ali Abdaal",
+    "isTopCreator": false,
+    "rating": 4.6,
+    "image": "/photo-brand/6.jpg",
+    "avatar": "/photo-brand/profile/6.jpg",
+    "tags": ["Productivity", "Study", "Tech", "Medicine", "Notion Guru"],
+    "socials": [
+      { "icon": "SiYoutube", "bgColor": "#FF0000", "color": "#ffffff", "followers": 4.5 },
+      { "icon": "SiInstagram", "bgColor": "#E1306C", "color": "#ffffff", "followers": 1.3 },
+      { "icon": "SiFacebook", "bgColor": "#1877F2", "color": "#ffffff", "followers": 0.9 }
+    ]
+  }
+]

@@ -1,26 +1,29 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect, ChangeEvent } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
 export default function AddProfilePic() {
-  const [preview, setPreview] = useState(null);
-  const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const purple = "rgba(120, 60, 145, 1)";
+  const currentStep = 5;
+  const router = useRouter();
 
-  const handleImageChange = (event) => {
+  useEffect(() => {
+    router.prefetch('/influencer-signin/information/Socialmedia');
+  }, [router]);
+
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onloadend = () => setPreview(reader.result);
+    reader.onloadend = () => setPreview(reader.result as string);
     reader.readAsDataURL(file);
   };
 
   const triggerFileInput = () => fileInputRef.current?.click();
-
-  const purple = "rgba(120, 60, 145, 1)";
-  const currentStep = 5;
-const router = useRouter();
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col overflow-hidden">
@@ -57,7 +60,8 @@ const router = useRouter();
           <button 
            type="button"
               onClick={() => router.push('/influencer-signin/information/Socialmedia')}
-          className="flex items-center gap-2 mb-4">
+              className="flex items-center gap-2 mb-4 transition-colors hover:bg-gray-100 rounded-lg p-1"
+          >
             <ArrowLeft size={20} className="bg-gray-200 rounded-lg cursor-pointer" />
             <h1 className="text-lg font-semibold">Add your profile pic</h1>
           </button>
@@ -66,9 +70,9 @@ const router = useRouter();
             {/* Upload Circle */}
             <div
               onClick={triggerFileInput}
-              className="w-36 h-36 rounded-full border-2 border-dashed flex items-center justify-center text-sm cursor-pointer relative overflow-hidden"
+              className="w-36 h-36 rounded-full border-2 border-dashed flex items-center justify-center text-sm cursor-pointer relative overflow-hidden transition-colors hover:bg-gray-50"
               style={{
-                borderColor: `${purple}`
+                borderColor: purple
               }}
             >
               {preview ? (
@@ -134,13 +138,13 @@ const router = useRouter();
           <div className="mt-6 space-y-2">
             <button
               style={{ background: purple }}
-              className="w-full text-white py-2 rounded-md transition"
+              className="w-full text-white py-2 rounded-md transition-colors hover:brightness-110"
             >
               NEXT
             </button>
             <button
               style={{ color: purple }}
-              className="w-full text-center text-sm"
+              className="w-full text-center text-sm transition-colors hover:bg-purple-50"
             >
               SKIP
             </button>

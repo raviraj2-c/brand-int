@@ -1,13 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
 export default function Kind() {
   const router = useRouter();
-  const currentStep = 2; 
+  const currentStep = 2;
   const purple = "rgba(120, 60, 145, 1)";
+
+  useEffect(() => {
+    router.prefetch('/influencer-signin/information/skill');
+    router.prefetch('/influencer-signin/information/address');
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col">
@@ -44,7 +49,7 @@ export default function Kind() {
               <button 
                 type="button"
                 onClick={() => router.push('/influencer-signin/information/address')}
-                className="bg-gray-200 p-2 rounded-md"
+                className="bg-gray-200 p-2 rounded-md transition-colors hover:bg-gray-300"
               >
                 <ArrowLeft size={20} className="text-gray-700" />
               </button>
@@ -73,7 +78,7 @@ export default function Kind() {
             type="button"
             onClick={() => router.push('/influencer-signin/information/skill')}
             style={{ background: purple }}
-            className="w-full text-white font-bold py-2 mt-2 rounded-full"
+            className="w-full text-white font-bold py-2 mt-2 rounded-full transition-colors hover:brightness-110"
           >
             NEXT
           </button>
@@ -82,7 +87,7 @@ export default function Kind() {
             type="button"
             onClick={() => router.push('/influencer-signin/information/skill')}
             style={{ color: purple }}
-            className="w-full font-bold py-2 mt-2 rounded-full"
+            className="w-full font-bold py-2 mt-2 rounded-full transition-colors hover:bg-purple-50"
           >
             SKIP
           </button>

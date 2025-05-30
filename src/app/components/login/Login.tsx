@@ -18,7 +18,7 @@ export default function Login({ onSignup }: LoginProps) {
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex items-center justify-center font-sans">
       <div className="flex max-w-3xl w-[90%] bg-white rounded-xl overflow-hidden border border-gray-300">
         {/* Left Section */}
-        <div className=" left-pane w-2/5 p-6">
+        <div className="left-pane w-2/5 p-6">
           <h2 className="text-4xl font-bold text-gray-900 mb-2 leading-tight">
             <span>Right </span>
             <span className="left-text bg-clip-text text-transparent">
@@ -70,22 +70,25 @@ export default function Login({ onSignup }: LoginProps) {
 
           <h2 className="pt-5 text-2xl font-bold text-center mb-6">Welcome back!</h2>
 
-          <form className="space-y-3">
+          <form className="space-y-3" suppressHydrationWarning>
             <input
               type="email"
               placeholder="Email"
               className="input-area w-full px-4 py-2 border rounded-md"
+              suppressHydrationWarning
             />
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 className="input-area w-full px-4 py-2 border rounded-md"
+                suppressHydrationWarning
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute top-3 right-3 text-gray-500"
+                suppressHydrationWarning
               >
                 {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
               </button>
@@ -101,6 +104,7 @@ export default function Login({ onSignup }: LoginProps) {
               type="submit"
               style={{ background: 'rgba(120, 60, 145, 1)' }}
               className="w-full text-white font-bold py-2 rounded-full"
+              suppressHydrationWarning
             >
               LOGIN
             </button>
@@ -112,7 +116,10 @@ export default function Login({ onSignup }: LoginProps) {
             <div className="flex-grow h-px bg-gray-500"></div>
           </div>
 
-          <button className="w-full flex items-center justify-center border border-gray-300 rounded-md py-2 hover:bg-gray-50">
+          <button 
+            className="w-full flex items-center justify-center border border-gray-300 rounded-md py-2 hover:bg-gray-50"
+            suppressHydrationWarning
+          >
             <Image src="/google.jpg" alt="google" width={20} height={20} className="mr-2" />
             Continue with Google
           </button>
@@ -128,6 +135,7 @@ export default function Login({ onSignup }: LoginProps) {
           <button
             onClick={onSignup ? onSignup : () => router.push('/?view=signin')}
             className="signup-button font-bold w-full bg-white py-2 rounded-full border"
+            suppressHydrationWarning
           >
             SIGN UP
           </button>

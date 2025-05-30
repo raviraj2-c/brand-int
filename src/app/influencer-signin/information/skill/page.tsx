@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, KeyboardEvent } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
@@ -11,9 +11,14 @@ export default function Skill() {
 
 
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState<string[]>([]);
 
-  const handleKeyDown = (e) => {
+  useEffect(() => {
+    router.prefetch('/influencer-signin/information/Socialmedia');
+    router.prefetch('/influencer-signin/information/kind-of-influencer');
+  }, [router]);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       e.preventDefault();
       if (!tags.includes(inputValue.trim())) {
@@ -56,9 +61,10 @@ export default function Skill() {
           <div className="mb-6">
             <h2 className="text-lg font-bold text-gray-800 flex items-baseline gap-2">
               <button
-               type="button"
-              onClick={() => router.push('/influencer-signin/information/kind-of-influencer')}
-              className="bg-gray-200 p-1.5 rounded-md inline-flex items-center justify-center">
+                type="button"
+                onClick={() => router.push('/influencer-signin/information/kind-of-influencer')}
+                className="bg-gray-200 p-1.5 rounded-md inline-flex items-center justify-center transition-colors hover:bg-gray-300"
+              >
                 <ArrowLeft size={20} className="text-gray-700" />
               </button>
               <span>
@@ -110,18 +116,18 @@ export default function Skill() {
           {/* Buttons */}
           <button
             type="button"
-              onClick={() => router.push('/influencer-signin/information/Socialmedia')}
+            onClick={() => router.push('/influencer-signin/information/Socialmedia')}
             style={{ background: purple }}
-            className="w-full text-white text-sm font-bold py-2 mt-2 rounded-full"
+            className="w-full text-white text-sm font-bold py-2 mt-2 rounded-full transition-colors hover:brightness-110"
           >
             NEXT
           </button>
 
           <button
-           type="button"
-              onClick={() => router.push('/influencer-signin/information/Socialmedia')}
+            type="button"
+            onClick={() => router.push('/influencer-signin/information/Socialmedia')}
             style={{ color: purple }}
-            className="w-full text-sm font-bold py-2 mt-2 rounded-full"
+            className="w-full text-sm font-bold py-2 mt-2 rounded-full transition-colors hover:bg-purple-50"
           >
             SKIP
           </button>

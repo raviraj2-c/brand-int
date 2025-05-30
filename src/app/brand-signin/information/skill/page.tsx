@@ -110,7 +110,7 @@ export default function Skill() {
           {/* Buttons */}
           <button
             type="button"
-              onClick={() => router.push('')}
+              onClick={() => router.push('/brand-home/home')}
             style={{ background: purple }}
             className="w-full text-white text-sm font-bold py-2 mt-2 rounded-full"
           >
@@ -119,7 +119,7 @@ export default function Skill() {
 
           <button
            type="button"
-              onClick={() => router.push('')}
+              onClick={() => router.push('/brand-home/home')}
             style={{ color: purple }}
             className="w-full text-sm font-bold py-2 mt-2 rounded-full"
           >
