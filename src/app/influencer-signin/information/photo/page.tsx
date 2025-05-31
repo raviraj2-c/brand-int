@@ -137,12 +137,16 @@ export default function AddProfilePic() {
           {/* Buttons */}
           <div className="mt-6 space-y-2">
             <button
+             type="button"
+              onClick={() => router.push('/influencer-home/home')}
               style={{ background: purple }}
               className="w-full text-white py-2 rounded-md transition-colors hover:brightness-110"
             >
               NEXT
             </button>
             <button
+             type="button"
+              onClick={() => router.push('/influencer-home/home')}
               style={{ color: purple }}
               className="w-full text-center text-sm transition-colors hover:bg-purple-50"
             >
