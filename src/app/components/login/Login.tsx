@@ -62,11 +62,12 @@ export default function Login({ onSignup }: LoginProps) {
 
         {/* Right Section */}
         <div className="w-3/5 p-6">
-          <div className="flex items-center">
-            <span className="text-lg font-bold tracking-wider">"</span>
-            <span className="text-lg font-bold tracking-wider rotate-45"> ) </span>
-            <span className="text-sm font-bold tracking-wider">SOCIAL STRATIX</span>
-          </div>
+           <div className="flex items-center">
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
+  <span className="ml-2 text-sm "></span>
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
+</div>
 
           <h2 className="pt-5 text-2xl font-bold text-center mb-6">Welcome back!</h2>
 
@@ -87,7 +88,7 @@ export default function Login({ onSignup }: LoginProps) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute top-3 right-3 text-gray-500"
+                className="absolute top-3 cursor-pointer right-3 text-gray-500"
                 suppressHydrationWarning
               >
                 {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
@@ -134,7 +135,7 @@ export default function Login({ onSignup }: LoginProps) {
 
           <button
             onClick={onSignup ? onSignup : () => router.push('/?view=signin')}
-            className="signup-button font-bold w-full bg-white py-2 rounded-full border"
+            className="signup-button cursor-pointer font-bold w-full bg-white py-2 rounded-full border cursor-pointer"
             suppressHydrationWarning
           >
             SIGN UP

@@ -14,9 +14,9 @@ export default function WhoAreYou() {
 
   const handleContinue = (): void => {
     if (selected === "Influencer") {
-      router.push("/influencer-signin");
+      router.push("/influencersignin");
     } else if (selected === "Brand") {
-      router.push("/brand-signin");
+      router.push("/brandsignin");
     }
   };
 
@@ -27,11 +27,12 @@ export default function WhoAreYou() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50">
       <nav className="bg-white shadow-md p-4 px-8">
-        <div className="flex items-center">
-          <span className="text-lg font-bold tracking-wider">"</span>
-          <span className="text-lg font-bold tracking-wider rotate-45"> ) </span>
-          <span className="text-sm font-bold tracking-wider ml-2">SOCIAL STRATIX</span>
-        </div>
+         <div className="flex items-center">
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
+  <span className="ml-2 text-sm "></span>
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
+</div>
       </nav>
 
       <div className="flex flex-col items-center justify-center py-12">
@@ -110,7 +111,7 @@ export default function WhoAreYou() {
             <button
               disabled={!selected}
               onClick={handleContinue}
-              className={`px-4 py-1.5 rounded-full border text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full cursor-pointer border text-sm font-medium transition-all duration-200 ${
                 selected
                   ? "hover:shadow-md"
                   : "bg-gray-300 cursor-not-allowed text-white border-gray-300"
