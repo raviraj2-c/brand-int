@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { Heart, ExternalLink } from "lucide-react";
-
 import { useRouter } from 'next/navigation';
+
 interface Campaign {
   id: number;
   postedTime: string;
@@ -85,20 +85,16 @@ const sampleCampaigns: Campaign[] = [
 ];
 
 const Card = () => {
-  
- const router = useRouter();
-
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"active" | "previous">("active");
   const [visibleCount, setVisibleCount] = useState<number>(3);
-
-  // Store which campaign's dropdown is open, by campaign id or null if none
   const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
   const dropdownRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const handleTabChange = (tab: "active" | "previous") => {
     setActiveTab(tab);
     setVisibleCount(3);
-    setOpenDropdownId(null); // close dropdown when switching tabs
+    setOpenDropdownId(null);
   };
 
   const handleSeeMore = () => setVisibleCount(sampleCampaigns.length);
@@ -130,7 +126,6 @@ const Card = () => {
     );
   };
 
-  // Close dropdown if clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -148,9 +143,9 @@ const Card = () => {
   }, [openDropdownId]);
 
   return (
-    <div className="max-w-4xl mx-auto mt-8  px-4">
+    <div className="max-w-4xl mx-auto mt-8 px-4">
       {/* Tabs */}
-      <div className="flex  text-sm font-semibold mb-4">
+      <div className="flex text-sm font-semibold mb-4">
         <button
           onClick={() => handleTabChange("active")}
           className={`px-3 cursor-pointer py-1.5 ${
@@ -159,7 +154,6 @@ const Card = () => {
               : "text-gray-500"
           }`}
         >
-          
           Active Campaigns
         </button>
         <button
@@ -172,11 +166,10 @@ const Card = () => {
         >
           Previous Campaigns
         </button>
-     
       </div>
 
       {/* Campaign List */}
-      <div className=" p-1">
+      <div className="p-1">
         {campaignsToShow.map((campaign) => (
           <div
             key={campaign.id}
@@ -184,35 +177,30 @@ const Card = () => {
           >
             {/* Top-right buttons */}
             <div className="absolute right-4 top-4 flex items-center gap-2">
-              
-<button
-                  style={{ borderColor: "rgb(120, 61, 145)" }}
-                  className="rounded-2xl cursor-pointer p-2 border"
-                  onClick={() =>
-                    setOpenDropdownId((prev) =>
-                      prev === campaign.id ? null : campaign.id
-                    )
-                  }
-                >
-                  <Heart className="w-3 h-3 text-[rgb(120, 61, 145)]  " />
-                </button>
+              <button
+                style={{ borderColor: "rgb(120, 61, 145)" }}
+                className="rounded-2xl cursor-pointer p-2 border"
+                onClick={() =>
+                  setOpenDropdownId((prev) =>
+                    prev === campaign.id ? null : campaign.id
+                  )
+                }
+              >
+                <Heart className="w-3 h-3 text-[rgb(120, 61, 145)]" />
+              </button>
               <div
                 className="relative"
-                ref={(el) => (dropdownRefs.current[campaign.id] = el)}
-              >
-
-                <button
-
-type="button"
-             
-                style={{
-                  background: "rgb(120, 61, 145)",
+                ref={(el) => {
+                  dropdownRefs.current[campaign.id] = el;
                 }}
-                className="rounded-full text-white px-4 py-1 text-sm font-semibold"
               >
-                Apply
-              </button>
-                
+                <button
+                  type="button"
+                  style={{ background: "rgb(120, 61, 145)" }}
+                  className="rounded-full text-white px-4 py-1 text-sm font-semibold"
+                >
+                  Apply
+                </button>
 
                 {openDropdownId === campaign.id && (
                   <div className="absolute z-10 top-full right-0 bg-white shadow-md text-sm mt-2 w-40 rounded-md">
