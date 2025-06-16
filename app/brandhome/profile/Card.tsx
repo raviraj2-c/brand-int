@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { Pencil, MoreVertical, ExternalLink } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import { useRouter } from 'next/navigation';
 interface Campaign {
   id: number;
   postedTime: string;
@@ -85,20 +85,16 @@ const sampleCampaigns: Campaign[] = [
 ];
 
 const Card = () => {
-  
- const router = useRouter();
-
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"active" | "previous">("active");
   const [visibleCount, setVisibleCount] = useState<number>(3);
-
-  // Store which campaign's dropdown is open, by campaign id or null if none
   const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
   const dropdownRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const handleTabChange = (tab: "active" | "previous") => {
     setActiveTab(tab);
     setVisibleCount(3);
-    setOpenDropdownId(null); // close dropdown when switching tabs
+    setOpenDropdownId(null);
   };
 
   const handleSeeMore = () => setVisibleCount(sampleCampaigns.length);
@@ -130,7 +126,6 @@ const Card = () => {
     );
   };
 
-  // Close dropdown if clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -148,9 +143,9 @@ const Card = () => {
   }, [openDropdownId]);
 
   return (
-    <div className="max-w-4xl mx-auto mt-8  px-4">
+    <div className="max-w-4xl mx-auto mt-8 px-4">
       {/* Tabs */}
-      <div className="flex  text-sm font-semibold mb-4">
+      <div className="flex text-sm font-semibold mb-4">
         <button
           onClick={() => handleTabChange("active")}
           className={`px-3 py-1.5 cursor-pointer ${
@@ -174,18 +169,16 @@ const Card = () => {
       </div>
 
       {/* Campaign List */}
-      <div className=" p-1">
+      <div className="p-1">
         {campaignsToShow.map((campaign) => (
           <div
             key={campaign.id}
             className="border-b border-gray-300 py-6 relative"
           >
-            {/* Top-right buttons */}
             <div className="absolute right-4 top-4 flex items-center gap-2">
               <button
-
-type="button"
-              onClick={() => router.push('/brandhome/edit')}
+                type="button"
+                onClick={() => router.push("/brandhome/edit")}
                 style={{
                   color: "rgb(120, 61, 145)",
                   background: "rgb(232 227 234)",
@@ -197,7 +190,9 @@ type="button"
 
               <div
                 className="relative"
-                ref={(el) => (dropdownRefs.current[campaign.id] = el)}
+                ref={(el) => {
+                  dropdownRefs.current[campaign.id] = el;
+                }}
               >
                 <button
                   style={{ color: "rgb(120, 61, 145)" }}
@@ -229,7 +224,6 @@ type="button"
               </div>
             </div>
 
-            {/* Main content */}
             <p className="text-sm text-gray-400 mb-1">
               Posted {campaign.time} ago
             </p>
@@ -271,7 +265,7 @@ type="button"
           </div>
         ))}
 
-        {/* See More/Less */}
+        {/* See More / See Less */}
         <div className="text-center mt-4">
           {visibleCount < sampleCampaigns.length ? (
             <button
