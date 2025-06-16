@@ -1,13 +1,10 @@
 'use client';
 
-
 import { useSearchParams } from 'next/navigation';
 import WhoAreYou from './components/who-are-you/WhoAreYou';
 import Login from './components/login/Login';
 
-
-
-export default function Home() {
+export default function ViewSwitcher() {
   const searchParams = useSearchParams();
   const view = searchParams.get('view');
 
@@ -16,8 +13,4 @@ export default function Home() {
   }
 
   return <Login />;
-
-
-  
-
 }

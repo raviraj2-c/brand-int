@@ -26,7 +26,7 @@ const Apply = () => {
           &lt; Back to influencer listing
         </button>
 
-        <div className="border rounded-md p-6 mb-8 bg-white shadow relative">
+        <div className=" rounded-md p-6 mb-8 bg-white shadow-sm relative">
           {/* Campaign Detail Header */}
           <div className="flex justify-between items-start">
             <div>

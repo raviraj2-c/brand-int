@@ -39,7 +39,7 @@ const Navbarall = () => {
             Find Work
           </Link>
           <Link 
-            href="/brandhome/masseges" 
+            href="/influencerhome/masseges" 
             className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
           >
             Messages

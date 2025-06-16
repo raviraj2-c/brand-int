@@ -174,7 +174,7 @@ export default function Information() {
       </nav>
 
       <div className="flex justify-center items-center flex-grow">
-        <div className="bg-white p-6 rounded-lg border w-full max-w-md">
+        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
           <p className="text-sm text-gray-400 mb-2">Question 1/5</p>
           <div className="flex mb-4 mt-1">
             {[...Array(5)].map((_, index) => (

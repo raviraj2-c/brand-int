@@ -42,7 +42,7 @@ export default function Skill() {
 
       {/* Form container */}
       <div className="flex mt-4 justify-center items-center flex-grow">
-        <div className="bg-white p-6 rounded-lg border w-full max-w-md shadow-sm">
+        <div className="bg-white p-6 rounded-lg  w-full max-w-md shadow-sm">
           <p className="text-xs text-gray-400 mb-2">Question 3/5</p>
 
           {/* Progress bar */}
