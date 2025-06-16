@@ -1,16 +1,10 @@
-'use client';
+import { Suspense } from 'react';
+import ViewSwitcher from './ViewSwitcher'; 
 
-import { useSearchParams } from 'next/navigation';
-import WhoAreYou from './components/who-are-you/WhoAreYou';
-import Login from './components/login/Login';
-
-export default function ViewSwitcher() {
-  const searchParams = useSearchParams();
-  const view = searchParams.get('view');
-
-  if (view === 'signin') {
-    return <WhoAreYou />;
-  }
-
-  return <Login />;
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ViewSwitcher />
+    </Suspense>
+  );
 }
