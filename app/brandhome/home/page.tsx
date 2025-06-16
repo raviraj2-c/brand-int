@@ -1,21 +1,46 @@
-"use client";
+'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { SiYoutube, SiInstagram, SiTiktok, SiFacebook, SiX } from 'react-icons/si';
 import { FaStar, FaCrown } from "react-icons/fa";
 
 import Navber from '../components/Navber';
 import Footer from '../components/Footer';
-import { useRouter } from 'next/navigation';
 import Filter from '../components/Filter';
 
-const iconMap = { SiYoutube, SiInstagram, SiTiktok, SiFacebook, SiX };
+// Type definitions
+interface Social {
+  icon: keyof typeof iconMap;
+  followers: number;
+  bgColor: string;
+}
+
+interface Influencer {
+  name: string;
+  avatar: string;
+  image: string;
+  rating: number;
+  isTopCreator: boolean;
+  tags: string[];
+  socials: Social[];
+}
+
+// Icon mapping
+const iconMap = {
+  SiYoutube,
+  SiInstagram,
+  SiTiktok,
+  SiFacebook,
+  SiX,
+};
 
 const HomePage = () => {
-  const [influencers, setInfluencers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [influencers, setInfluencers] = useState<Influencer[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
+  // Fetch influencers on load
   useEffect(() => {
     fetch('/data-brand.json')
       .then(res => res.json())
@@ -23,6 +48,7 @@ const HomePage = () => {
       .catch(err => console.error('Failed to load influencers data', err));
   }, []);
 
+  // All suggestions for search
   const allSuggestions = useMemo(() => {
     if (!influencers.length) return [];
     const names = influencers.map(i => i.name);
@@ -30,6 +56,7 @@ const HomePage = () => {
     return Array.from(new Set([...names, ...tags]));
   }, [influencers]);
 
+  // Filtered influencers by search term
   const filteredInfluencers = influencers.filter((inf) =>
     inf.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     inf.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -46,9 +73,9 @@ const HomePage = () => {
       <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col">
         <main className="px-4 py-6 max-w-7xl mx-auto">
 
-          {/* Conditionally show Filer or Header */}
+          {/* Header or Filter */}
           {searchTerm.trim() !== '' ? (
-            <Filter/>
+            <Filter />
           ) : (
             <header className="text-center mb-6">
               <h1
@@ -66,87 +93,87 @@ const HomePage = () => {
             </header>
           )}
 
-          <div className='bg-white p-4 shadow-sm'>
-            <h1 className='text-base font-semibold mb-3'>Title</h1>
+          {/* Influencer Grid */}
+          <div className="bg-white p-4 shadow-sm">
+            <h1 className="text-base font-semibold mb-3">Title</h1>
 
-           <section className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-  {filteredInfluencers.length === 0 ? (
-    <p className="text-gray-500 col-span-full text-center text-sm">No influencers found.</p>
-  ) : (
-    filteredInfluencers.map((influencer, idx) => (
-      <div
-        key={idx}
-        className="bg-gray-100 rounded-lg overflow-hidden shadow-md transition duration-300 w-full flex flex-col"
-        style={{ fontSize: '0.75rem' }}
-      >
-        <button className="cursor-pointer" type="button" onClick={() => router.push('/brandhome/home/brand-page')}>
-          {/* Image Section */}
-          <div className="relative w-full aspect-video">
-            <Image
-              src={influencer.image}
-              alt={influencer.name}
-              fill
-              className="object-cover"
-            />
-            {/* Top Creator Badge */}
-            {influencer.isTopCreator && (
-              <div className="absolute top-1 left-1 bg-white text-[0.6rem] font-medium text-black px-1 py-0.5 rounded-sm flex items-center gap-1 shadow">
-                <FaCrown className="text-yellow-500" /> Top Creator
-              </div>
-            )}
-            {/* Rating */}
-            <div className="absolute top-1 right-1 bg-white text-black text-[0.6rem] font-semibold px-1 py-0.5 rounded-lg shadow flex items-center gap-1">
-              <FaStar className="text-yellow-500" /> {influencer.rating}
-            </div>
-          </div>
-
-          {/* Content Section */}
-          <div className="pt-1 px-2 pb-2 flex flex-col flex-1 justify-start items-start gap-1">
-            {/* Avatar + Name */}
-            <div className="flex items-center gap-1 mb-1">
-              <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-white shadow-md">
-                <Image
-                  src={influencer.avatar}
-                  alt={`${influencer.name} avatar`}
-                  width={28}
-                  height={28}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <h3 className="font-bold text-xs text-[#3f2d56]">{influencer.name}</h3>
-            </div>
-
-            {/* Tags */}
-            <p className="text-[0.65rem] text-gray-500 line-clamp-2 text-left w-full">
-              {influencer.tags.join(', ')}
-            </p>
-
-            {/* Social Media Icons */}
-            <div className="flex flex-wrap gap-1 w-full text-[0.65rem] font-medium">
-              {influencer.socials.map((social, i) => {
-                const Icon = iconMap[social.icon] || (() => null);
-                return (
+            <section className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {filteredInfluencers.length === 0 ? (
+                <p className="text-gray-500 col-span-full text-center text-sm">No influencers found.</p>
+              ) : (
+                filteredInfluencers.map((influencer, idx) => (
                   <div
-                    key={i}
-                    className="flex items-center border gap-1 px-1 py-0.5 rounded-sm"
-                    style={{
-                      borderColor: social.bgColor,
-                      color: social.bgColor
-                    }}
+                    key={idx}
+                    className="bg-gray-100 rounded-lg overflow-hidden shadow-md transition duration-300 w-full flex flex-col"
+                    style={{ fontSize: '0.75rem' }}
                   >
-                    <Icon className="w-3 h-3" />
-                    {social.followers}k
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </button>
-      </div>
-    ))
-  )}
-</section>
+                    <button className="cursor-pointer" type="button" onClick={() => router.push('/brandhome/home/brand-page')}>
+                      {/* Image Section */}
+                      <div className="relative w-full aspect-video">
+                        <Image
+                          src={influencer.image}
+                          alt={influencer.name}
+                          fill
+                          className="object-cover"
+                        />
+                        {/* Top Creator Badge */}
+                        {influencer.isTopCreator && (
+                          <div className="absolute top-1 left-1 bg-white text-[0.6rem] font-medium text-black px-1 py-0.5 rounded-sm flex items-center gap-1 shadow">
+                            <FaCrown className="text-yellow-500" /> Top Creator
+                          </div>
+                        )}
+                        {/* Rating */}
+                        <div className="absolute top-1 right-1 bg-white text-black text-[0.6rem] font-semibold px-1 py-0.5 rounded-lg shadow flex items-center gap-1">
+                          <FaStar className="text-yellow-500" /> {influencer.rating}
+                        </div>
+                      </div>
 
+                      {/* Content Section */}
+                      <div className="pt-1 px-2 pb-2 flex flex-col flex-1 justify-start items-start gap-1">
+                        {/* Avatar + Name */}
+                        <div className="flex items-center gap-1 mb-1">
+                          <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-white shadow-md">
+                            <Image
+                              src={influencer.avatar}
+                              alt={`${influencer.name} avatar`}
+                              width={28}
+                              height={28}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                          <h3 className="font-bold text-xs text-[#3f2d56]">{influencer.name}</h3>
+                        </div>
+
+                        {/* Tags */}
+                        <p className="text-[0.65rem] text-gray-500 line-clamp-2 text-left w-full">
+                          {influencer.tags.join(', ')}
+                        </p>
+
+                        {/* Social Media */}
+                        <div className="flex flex-wrap gap-1 w-full text-[0.65rem] font-medium">
+                          {influencer.socials.map((social, i) => {
+                            const Icon = iconMap[social.icon] || (() => null);
+                            return (
+                              <div
+                                key={i}
+                                className="flex items-center border gap-1 px-1 py-0.5 rounded-sm"
+                                style={{
+                                  borderColor: social.bgColor,
+                                  color: social.bgColor
+                                }}
+                              >
+                                <Icon className="w-3 h-3" />
+                                {social.followers}k
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                ))
+              )}
+            </section>
           </div>
         </main>
         <Footer />
