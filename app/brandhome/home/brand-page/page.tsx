@@ -579,24 +579,25 @@ const reviews = Array(3).fill({
                 className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1 justify-start"
                 style={{ zIndex: 10 }}
               >
-                {[
-                  { platform: "Instagram", icon: "/Instagram.png", key: "ig", border: "border-red-500" },
-                  { platform: "Facebook", icon: "/facebook.jpeg", key: "fb", border: "border-blue-500" },
-                  { platform: "X", icon: "/twitter.png", key: "x", border: "border-black" },
-                  { platform: "YouTube", icon: "/YouTube.png", key: "yt", border: "border-red-500" },
-                  { platform: "TikTok", icon: "/tiktok.avif", key: "tiktok", border: "border-black" },
-                ].map((item, i) =>
-                  influencer.socials[item.key] ? (
-                    <button
-                      key={i}
-                      className={`flex items-center px-2 py-0.5 rounded-sm border text-[10px] font-medium bg-white shadow ${item.border}`}
-                      style={{ backgroundColor: "white" }}
-                    >
-                      <img src={item.icon} alt={item.platform} className="w-3 h-3 mr-1" />
-                      {influencer.socials[item.key]}
-                    </button>
-                  ) : null
-                )}
+               {[
+  { platform: "Instagram", icon: "/Instagram.png", key: "ig", border: "border-red-500" },
+  { platform: "Facebook", icon: "/facebook.jpeg", key: "fb", border: "border-blue-500" },
+  { platform: "X", icon: "/twitter.png", key: "x", border: "border-black" },
+  { platform: "YouTube", icon: "/YouTube.png", key: "yt", border: "border-red-500" },
+  { platform: "TikTok", icon: "/tiktok.avif", key: "tiktok", border: "border-black" },
+].map((item, i) =>
+  influencer.socials[item.key as keyof typeof influencer.socials] ? (
+    <button
+      key={i}
+      className={`flex items-center px-2 py-0.5 rounded-sm border text-[10px] font-medium bg-white shadow ${item.border}`}
+      style={{ backgroundColor: "white" }}
+    >
+      <img src={item.icon} alt={item.platform} className="w-3 h-3 mr-1" />
+      {influencer.socials[item.key as keyof typeof influencer.socials]}
+    </button>
+  ) : null
+)}
+
               </div>
             </div>
 
