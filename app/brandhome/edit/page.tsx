@@ -19,9 +19,10 @@ const Edit = () => {
 
   return (
     <>
+    <div className='min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50'>
       <Navbarall />
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <div className="border rounded-md p-6 mb-8 bg-white shadow relative">
+        <div className=" rounded-md p-6 mb-8 bg-white shadow-sm relative">
           <div className="flex justify-between items-start">
             <div>
               <div className="flex items-center gap-2">
@@ -249,6 +250,8 @@ const Edit = () => {
         </div>
       </div>
       <Footer />
+    <div/>
+    </div>
     </>
   );
 };
