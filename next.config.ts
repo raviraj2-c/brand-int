@@ -8,6 +8,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    domains: ['cdn-icons-png.flaticon.com'],
   },
 };
 

@@ -4,15 +4,16 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
 export default function AddProfilePic() {
-  const [preview, setPreview] = useState(null);
-  const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onloadend = () => setPreview(reader.result);
+    reader.onloadend = () => setPreview(reader.result as string);
     reader.readAsDataURL(file);
   };
 
@@ -20,18 +21,17 @@ export default function AddProfilePic() {
 
   const purple = "rgba(120, 60, 145, 1)";
   const currentStep = 5;
-const router = useRouter();
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col overflow-hidden">
       {/* Navbar */}
       <nav className="bg-white shadow-md p-4 px-8">
         <div className="flex items-center">
-  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
-  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
-  <span className="ml-2 text-sm "></span>
-  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
-</div>
+          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
+          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
+          <span className="ml-2 text-sm "></span>
+          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
+        </div>
       </nav>
 
       {/* Main Content */}
@@ -54,11 +54,11 @@ const router = useRouter();
           </div>
 
           {/* Header */}
-
           <button 
-           type="button"
-              onClick={() => router.push('/brandsignin/information/about')}
-          className="flex cursor-pointer items-center gap-2 mb-4">
+            type="button"
+            onClick={() => router.push('/brandsignin/information/about')}
+            className="flex cursor-pointer items-center gap-2 mb-4"
+          >
             <ArrowLeft size={20} className="bg-gray-200 rounded-lg cursor-pointer" />
             <h1 className="text-lg font-semibold">Add your company logo</h1>
           </button>
@@ -67,10 +67,8 @@ const router = useRouter();
             {/* Upload Circle */}
             <div
               onClick={triggerFileInput}
-              className="w-36 cursor-pointer h-36 rounded-full border-2 border-dashed flex items-center justify-center text-sm cursor-pointer relative overflow-hidden cursor"
-              style={{
-                borderColor: `${purple}`
-              }}
+              className="w-36 h-36 rounded-full border-2 border-dashed flex items-center justify-center text-sm relative overflow-hidden cursor-pointer"
+              style={{ borderColor: `${purple}` }}
             >
               {preview ? (
                 <img
@@ -117,11 +115,7 @@ const router = useRouter();
               <p className="text-xs text-gray-500">
                 Must be an actual photo of you. Logos, clip-art, group photos, and
                 digitally-altered images are not recommended.{" "}
-                <a
-                  href="#"
-                  className="underline"
-                  style={{ color: purple }}
-                >
+                <a href="#" className="underline" style={{ color: purple }}>
                   Learn more
                 </a>
               </p>
@@ -134,18 +128,18 @@ const router = useRouter();
           {/* Buttons */}
           <div className="mt-6 space-y-2">
             <button
-            type="button"
+              type="button"
               onClick={() => router.push('/brandsignin/information/Socialmedia')}
               style={{ background: purple }}
-              className="w-full text-white cursor-pointer py-2 rounded-md transition"
+              className="w-full text-white py-2 rounded-md transition"
             >
               NEXT
             </button>
             <button
-            type="button"
+              type="button"
               onClick={() => router.push('/brandsignin/information/Socialmedia')}
               style={{ color: purple }}
-              className="w-full cursor-pointer text-center text-sm"
+              className="w-full text-center text-sm"
             >
               SKIP
             </button>

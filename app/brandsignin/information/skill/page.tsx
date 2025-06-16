@@ -3,17 +3,15 @@ import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
-
 export default function Skill() {
   const currentStep = 5;
   const purple = "rgba(120, 60, 145, 1)";
   const router = useRouter();
 
+  const [inputValue, setInputValue] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
 
-  const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState([]);
-
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       e.preventDefault();
       if (!tags.includes(inputValue.trim())) {
@@ -28,16 +26,16 @@ export default function Skill() {
       {/* Navbar */}
       <nav className="bg-white shadow-md p-4 px-6">
         <div className="flex items-center">
-  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
-  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
-  <span className="ml-2 text-sm "></span>
-  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
-</div>
+          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
+          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
+          <span className="ml-2 text-sm "></span>
+          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
+        </div>
       </nav>
 
       {/* Form container */}
       <div className="flex mt-4 justify-center items-center flex-grow">
-        <div className="bg-white p-6 rounded-lg border w-full max-w-md shadow-sm">
+        <div className="bg-white p-6 rounded-lg  w-full max-w-md shadow-sm">
           <p className="text-xs text-gray-400 mb-2">Question 5/5</p>
 
           {/* Progress bar */}
@@ -57,9 +55,10 @@ export default function Skill() {
           <div className="mb-6">
             <h2 className="text-lg font-bold text-gray-800 flex items-baseline gap-2">
               <button
-               type="button"
-              onClick={() => router.push('/brandsignin/information/Socialmedia')}
-              className="bg-gray-200 p-1.5 cursor-pointer rounded-md inline-flex items-center justify-center">
+                type="button"
+                onClick={() => router.push('/brandsignin/information/Socialmedia')}
+                className="bg-gray-200 p-1.5 cursor-pointer rounded-md inline-flex items-center justify-center"
+              >
                 <ArrowLeft size={20} className="text-gray-700" />
               </button>
               <span>
@@ -91,10 +90,7 @@ export default function Skill() {
 
           {/* Tags Display */}
           {tags.length > 0 && (
-            <div
-              className="border rounded-md p-3 mb-4"
-              style={{ borderColor: purple }}
-            >
+            <div className="border rounded-md p-3 mb-4" style={{ borderColor: purple }}>
               <div className="grid grid-cols-3 gap-2">
                 {tags.map((tag, index) => (
                   <span
@@ -111,7 +107,7 @@ export default function Skill() {
           {/* Buttons */}
           <button
             type="button"
-              onClick={() => router.push('/brandhome/home')}
+            onClick={() => router.push('/brandhome/home')}
             style={{ background: purple }}
             className="w-full text-white cursor-pointer text-sm font-bold py-2 mt-2 rounded-full"
           >
@@ -119,15 +115,13 @@ export default function Skill() {
           </button>
 
           <button
-           type="button"
-              onClick={() => router.push('/brandhome/home')}
+            type="button"
+            onClick={() => router.push('/brandhome/home')}
             style={{ color: purple }}
             className="w-full text-sm cursor-pointer font-bold py-2 mt-2 rounded-full"
           >
             SKIP
           </button>
-
-        
         </div>
       </div>
     </div>

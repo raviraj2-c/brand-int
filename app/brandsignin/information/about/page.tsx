@@ -23,7 +23,7 @@ export default function About() {
 
       {/* Form container */}
       <div className="flex justify-center items-center flex-grow px-4">
-        <div className="bg-white p-6 sm:p-8 rounded-lg border w-full max-w-lg">
+        <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md w-full max-w-lg">
           <p className="text-sm text-gray-400 mb-2">Question 2/5</p>
 
           {/* Progress bar */}
