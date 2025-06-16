@@ -243,9 +243,9 @@ export default function HomePage() {
                       </button>
                       <div
                         className="relative"
-                        ref={(el) =>
-                          (dropdownRefs.current[campaign.id] = el)
-                        }
+                        ref={(el) => {
+                          dropdownRefs.current[campaign.id] = el;
+                        }}
                       >
                         <button
                           type="button"
