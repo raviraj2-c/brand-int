@@ -5,7 +5,7 @@ import { ArrowLeft, X } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
 const socialAccounts = [
-  { name: "Instagram", icon: "/instagram.png" },
+  { name: "Instagram", icon: "/Instagram.png" },
   { name: "Facebook", icon: "/facebook.jpeg" },
   { name: "TikTok", icon: "/tiktok.avif" },
   { name: "X", icon: "/twitter.png" },
