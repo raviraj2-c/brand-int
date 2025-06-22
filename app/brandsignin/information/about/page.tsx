@@ -65,7 +65,7 @@ export default function About() {
           <input
             type="text"
             placeholder="Describe what your company/brand does"
-            className="w-full px-4 py-2 outline-none text-gray-700 bg-white rounded-md placeholder-black mb-4"
+            className="w-full px-4 py-2 outline-none text-gray-700 bg-white rounded-md placeholder-gray-400 mb-4"
             style={{ border: `1px solid ${purple}` }}
           />
 
@@ -90,7 +90,7 @@ export default function About() {
 
           {/* Image */}
           <div className="mt-6 flex justify-center">
-            <img src="/about.png" alt="Kind Example" className="max-w-xs" />
+            <img src="/about.png" alt="Kind Example" className="w-screen" />
           </div>
         </div>
       </div>

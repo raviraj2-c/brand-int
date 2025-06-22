@@ -9,10 +9,8 @@ export default function Verify() {
   const currentStep = 1; 
   const purple = "rgba(120, 60, 145, 1)";
 
-
-const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-
 
   const isActive = isFocused || otp.length > 0;
 
@@ -57,22 +55,25 @@ const [otp, setOtp] = useState('');
           </div>
 
           {/* Input */}
-           <div className="relative w-full mb-4">
-      <label
-        className={`absolute left-3 px-1 transition-all bg-white duration-200 ${
-          isActive ? 'text-sm -top-2' : 'top-2 text-gray-500'
-        }`}
-        style={isActive ? { color: purple, zIndex: 1 } : { zIndex: 1 }}
-      >
-        One Time Password
-      </label>
+          <div className="relative w-full mb-4">
+      {/* Show label only if active */}
+      {isActive && (
+        <label
+          style={{ color: purple }}
+          className="absolute left-3 px-1 bg-white -top-3 text-sm transition-all duration-200"
+        >
+          One Time Password
+        </label>
+      )}
+
       <input
         type="text"
         value={otp}
-        onChange={(e) => setOtp(e.target.value)}
+        placeholder={isActive ? '' : 'One Time Password'}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className="w-full px-3 pt-2 pb-2 text-gray-900 bg-white border rounded-md outline-none"
+        onChange={(e) => setOtp(e.target.value)}
+        className="w-full px-3 py-2 text-gray-900 bg-white border rounded-md outline-none"
         style={{ border: `2px solid ${purple}` }}
       />
     </div>

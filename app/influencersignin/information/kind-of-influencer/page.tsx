@@ -70,7 +70,7 @@ export default function Kind() {
           <input
             type="text"
             placeholder="Describe the kind of influencer you are"
-            className="w-full px-4 py-2 outline-none text-gray-700 bg-white rounded-md placeholder-black mb-4"
+            className="w-full px-4 py-2 outline-none text-gray-700 bg-white rounded-md placeholder-gray-400 mb-4"
             style={{ border: `1px solid ${purple}` }}
           />
 
@@ -94,8 +94,8 @@ export default function Kind() {
           </button>
 
           {/* Image */}
-          <div className="mt-6 flex justify-center">
-            <img src="/Kind.png" alt="Kind Example" className="max-w-xs" />
+          <div className="mt-6 flex justify-center ">
+            <img src="/Kind.png" alt="Kind Example" className="w-screen" />
           </div>
         </div>
       </div>

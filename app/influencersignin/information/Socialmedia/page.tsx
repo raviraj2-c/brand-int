@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { ArrowLeft, X } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
 const socialAccounts = [
@@ -17,11 +17,25 @@ const purple = "rgba(120, 60, 145, 1)";
 
 export default function LinkSocialMediaAccount() {
   const router = useRouter();
+  const [openDropdownIdx, setOpenDropdownIdx] = useState<number | null>(null);
+  const [links, setLinks] = useState<string[]>([]);
 
   useEffect(() => {
     router.prefetch('/influencersignin/information/photo');
     router.prefetch('/influencersignin/information/skill');
   }, [router]);
+
+  const handleLinkChange = (index: number, value: string) => {
+    const updated = [...links];
+    updated[index] = value;
+    setLinks(updated);
+  };
+
+  const handleClear = (index: number) => {
+    const updated = [...links];
+    updated[index] = '';
+    setLinks(updated);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col">
@@ -60,18 +74,40 @@ export default function LinkSocialMediaAccount() {
 
           <div className="space-y-3">
             {socialAccounts.map((account, idx) => (
-              <button
-                key={idx}
-                className="w-full flex items-center gap-3 p-3 border rounded-md text-left transition-colors hover:bg-gray-50"
-                style={{ borderColor: purple }}
-              >
-                <img
-                  src={account.icon}
-                  alt={account.name}
-                  className="w-5 h-5"
-                />
-                <span>Link {account.name} Account</span>
-              </button>
+              <div key={idx} className="relative space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setOpenDropdownIdx(openDropdownIdx === idx ? null : idx)}
+                  className="w-full flex items-center gap-3 p-3 border rounded-md text-left transition-colors hover:bg-gray-50"
+                  style={{ borderColor: purple }}
+                >
+                  <img
+                    src={account.icon}
+                    alt={account.name}
+                    className="w-5 h-5"
+                  />
+                  <span>Link {account.name} Account</span>
+                </button>
+
+                {openDropdownIdx === idx && (
+                  <div className="relative">
+                    <input
+                      type="url"
+                      placeholder={`Enter ${account.name} link`}
+                      className="w-full p-2 border rounded-md text-sm placeholder-gray-400 pr-10"
+                      style={{ borderColor: purple }}
+                      value={links[idx] || ''}
+                      onChange={(e) => handleLinkChange(idx, e.target.value)}
+                    />
+                    {links[idx] && (
+                      <X
+                        className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-red-500 w-4 h-4"
+                        onClick={() => handleClear(idx)}
+                      />
+                    )}
+                  </div>
+                )}
+              </div>
             ))}
 
             <button

@@ -31,7 +31,7 @@ export default function Dasbord() {
 
             <div className="min-w-0 flex-grow">
               <h2 className="text-xl font-semibold flex items-center">
-                Starbucks
+               INFLUENCER
                
               </h2>
               <div className="flex items-center flex-wrap">

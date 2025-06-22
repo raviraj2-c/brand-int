@@ -1,17 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, KeyboardEvent } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from 'next/navigation';
+
 
 export default function Skill() {
   const currentStep = 5;
   const purple = "rgba(120, 60, 145, 1)";
   const router = useRouter();
 
-  const [inputValue, setInputValue] = useState<string>("");
+
+  const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    router.prefetch('/influencersignin/information/Socialmedia');
+    router.prefetch('/influencersignin/information/kind-of-influencer');
+  }, [router]);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       e.preventDefault();
       if (!tags.includes(inputValue.trim())) {
@@ -25,12 +32,12 @@ export default function Skill() {
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col">
       {/* Navbar */}
       <nav className="bg-white shadow-md p-4 px-6">
-        <div className="flex items-center">
-          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
-          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
-          <span className="ml-2 text-sm "></span>
-          <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
-        </div>
+         <div className="flex items-center">
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">"</h1>
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider rotate-40">)</h1>
+  <span className="ml-2 text-sm "></span>
+  <h1 className="text-lg font-bold text-[rgb(43 38 51)] tracking-wider">SOCIAL STRATIX</h1>
+</div>
       </nav>
 
       {/* Form container */}
@@ -57,7 +64,7 @@ export default function Skill() {
               <button
                 type="button"
                 onClick={() => router.push('/brandsignin/information/Socialmedia')}
-                className="bg-gray-200 p-1.5 cursor-pointer rounded-md inline-flex items-center justify-center"
+                className="bg-gray-200 cursor-pointer p-1.5 rounded-md inline-flex items-center justify-center transition-colors hover:bg-gray-300"
               >
                 <ArrowLeft size={20} className="text-gray-700" />
               </button>
@@ -80,7 +87,7 @@ export default function Skill() {
             <input
               type="text"
               placeholder="Add Tags"
-              className="w-full px-3 py-2 outline-none text-sm text-gray-700 bg-white rounded-md placeholder-black"
+              className="w-full px-3 py-2 outline-none text-sm text-gray-700 bg-white rounded-md placeholder-gray-400"
               style={{ border: `1px solid ${purple}` }}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
@@ -89,27 +96,42 @@ export default function Skill() {
           </div>
 
           {/* Tags Display */}
-          {tags.length > 0 && (
-            <div className="border rounded-md p-3 mb-4" style={{ borderColor: purple }}>
-              <div className="grid grid-cols-3 gap-2">
-                {tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full text-center"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
+        {tags.length > 0 && (
+  <div
+    className="border rounded-md p-3 mb-4"
+    style={{ borderColor: purple }}
+  >
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag, index) => (
+        <span
+          key={index}
+          className="flex items-center bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full"
+        >
+          {tag}
+          <button
+            onClick={() => {
+              const updatedTags = [...tags];
+              updatedTags.splice(index, 1);
+              setTags(updatedTags);
+            }}
+            className="ml-2 text-gray-500 hover:text-red-500 focus:outline-none"
+            aria-label="Remove tag"
+          >
+            &times;
+          </button>
+        </span>
+      ))}
+    </div>
+  </div>
+)}
+
 
           {/* Buttons */}
           <button
             type="button"
             onClick={() => router.push('/brandhome/home')}
             style={{ background: purple }}
-            className="w-full text-white cursor-pointer text-sm font-bold py-2 mt-2 rounded-full"
+            className="w-full cursor-pointer text-white text-sm font-bold py-2 mt-2 rounded-full transition-colors hover:brightness-110"
           >
             NEXT
           </button>
@@ -118,10 +140,13 @@ export default function Skill() {
             type="button"
             onClick={() => router.push('/brandhome/home')}
             style={{ color: purple }}
-            className="w-full text-sm cursor-pointer font-bold py-2 mt-2 rounded-full"
+            className="w-full cursor-pointer text-sm font-bold py-2 mt-2 rounded-full transition-colors hover:bg-purple-50"
           >
             SKIP
           </button>
+
+          {/* Example Image */}
+          <img src="/Tag.png" alt="Example tags" className="w-screen mt-4 rounded-md" />
         </div>
       </div>
     </div>

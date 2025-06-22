@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 
 export default function Skill() {
-  const currentStep = 3;
+  const currentStep = 5;
   const purple = "rgba(120, 60, 145, 1)";
   const router = useRouter();
 
@@ -43,7 +43,7 @@ export default function Skill() {
       {/* Form container */}
       <div className="flex mt-4 justify-center items-center flex-grow">
         <div className="bg-white p-6 rounded-lg  w-full max-w-md shadow-sm">
-          <p className="text-xs text-gray-400 mb-2">Question 3/5</p>
+          <p className="text-xs text-gray-400 mb-2">Question 5/5</p>
 
           {/* Progress bar */}
           <div className="flex mb-4">
@@ -87,7 +87,7 @@ export default function Skill() {
             <input
               type="text"
               placeholder="Add Tags"
-              className="w-full px-3 py-2 outline-none text-sm text-gray-700 bg-white rounded-md placeholder-black"
+              className="w-full px-3 py-2 outline-none text-sm text-gray-700 bg-white rounded-md placeholder-gray-400"
               style={{ border: `1px solid ${purple}` }}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
@@ -96,23 +96,35 @@ export default function Skill() {
           </div>
 
           {/* Tags Display */}
-          {tags.length > 0 && (
-            <div
-              className="border rounded-md p-3 mb-4"
-              style={{ borderColor: purple }}
-            >
-              <div className="grid grid-cols-3 gap-2">
-                {tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full text-center"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
+        {tags.length > 0 && (
+  <div
+    className="border rounded-md p-3 mb-4"
+    style={{ borderColor: purple }}
+  >
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag, index) => (
+        <span
+          key={index}
+          className="flex items-center bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full"
+        >
+          {tag}
+          <button
+            onClick={() => {
+              const updatedTags = [...tags];
+              updatedTags.splice(index, 1);
+              setTags(updatedTags);
+            }}
+            className="ml-2 text-gray-500 hover:text-red-500 focus:outline-none"
+            aria-label="Remove tag"
+          >
+            &times;
+          </button>
+        </span>
+      ))}
+    </div>
+  </div>
+)}
+
 
           {/* Buttons */}
           <button
@@ -134,7 +146,7 @@ export default function Skill() {
           </button>
 
           {/* Example Image */}
-          <img src="/Tag.png" alt="Example tags" className="w-full mt-4 rounded-md" />
+          <img src="/Tag.png" alt="Example tags" className="w-screen mt-4 rounded-md" />
         </div>
       </div>
     </div>

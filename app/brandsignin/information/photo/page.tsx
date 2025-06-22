@@ -20,7 +20,7 @@ export default function AddProfilePic() {
   const triggerFileInput = () => fileInputRef.current?.click();
 
   const purple = "rgba(120, 60, 145, 1)";
-  const currentStep = 5;
+  const currentStep = 3;
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-50 to-yellow-50 flex flex-col overflow-hidden">
@@ -38,7 +38,7 @@ export default function AddProfilePic() {
       <div className="flex flex-1 items-center justify-center bg-[#f9f6f4] overflow-hidden">
         <div className="bg-white p-6 rounded-lg shadow-md w-[420px]">
           {/* Step Info */}
-          <div className="text-sm text-gray-500 mb-2">Question 5/5</div>
+          <div className="text-sm text-gray-500 mb-2">Question 3/5</div>
 
           {/* Progress Bar */}
           <div className="flex mb-4 mt-1">

@@ -18,7 +18,7 @@ const Navbarall = () => {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search influencers"
+            placeholder="Search brand"
             className="pl-3 pr-10 py-1.5 rounded-md border border-[rgb(98 93 100)] text-[rgb(98 93 100)] text-sm w-56"
             suppressHydrationWarning
           />

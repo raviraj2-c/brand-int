@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+
+import React, { useState } from "react";
 import { Heart, ExternalLink } from "lucide-react";
 import { useRouter } from 'next/navigation';
 
@@ -14,6 +15,7 @@ interface Campaign {
   location: string;
   budget: string;
   platforms: string[];
+   website: string;
 }
 
 const sampleCampaigns: Campaign[] = [
@@ -24,11 +26,11 @@ const sampleCampaigns: Campaign[] = [
     time: "3 hours",
     campaignName: "Nike Summer Collection 2025",
     categories: ["Lifestyle", "Fitness", "Fashion"],
-    description:
-      "Looking for fitness and lifestyle influencers to showcase our summer wear collection in a dynamic and authentic way.",
+    description: "Looking for fitness and lifestyle influencers...",
     location: "Mumbai",
     budget: "₹15,000",
     platforms: ["instagram", "youtube"],
+    website: "https://www.nike.com/in", // 👈 Website link
   },
   {
     id: 2,
@@ -37,11 +39,11 @@ const sampleCampaigns: Campaign[] = [
     time: "1 day",
     campaignName: "Zara Style Fest",
     categories: ["Fashion", "Beauty"],
-    description:
-      "Seeking fashion-forward creators to promote our new seasonal arrivals with reels and story content.",
+    description: "Seeking fashion-forward creators...",
     location: "Delhi",
     budget: "₹12,000",
     platforms: ["instagram", "tiktok"],
+    website: "https://www.zara.com/in/",
   },
   {
     id: 3,
@@ -50,11 +52,11 @@ const sampleCampaigns: Campaign[] = [
     time: "5 hours",
     campaignName: "iPhone 16 Awareness Campaign",
     categories: ["Technology", "Lifestyle"],
-    description:
-      "Partner with Apple to demonstrate the newest iPhone 16 features in a modern, engaging manner.",
+    description: "Partner with Apple to demonstrate iPhone 16...",
     location: "Bangalore",
     budget: "₹50,000",
     platforms: ["youtube"],
+    website: "https://www.apple.com/in/",
   },
   {
     id: 4,
@@ -63,11 +65,11 @@ const sampleCampaigns: Campaign[] = [
     time: "3 days",
     campaignName: "Natural Skincare Drive",
     categories: ["Beauty", "Health", "Lifestyle"],
-    description:
-      "Influencers needed to try and review our skincare kits made with natural ingredients. Honest feedback preferred.",
+    description: "Influencers needed to try our skincare kits...",
     location: "Hyderabad",
     budget: "₹8,000",
     platforms: ["instagram", "facebook"],
+    website: "https://mamaearth.in/",
   },
   {
     id: 5,
@@ -76,11 +78,11 @@ const sampleCampaigns: Campaign[] = [
     time: "2 hours",
     campaignName: "Swiggy Summer Cravings",
     categories: ["Food", "Lifestyle"],
-    description:
-      "Promote exciting summer food deals on Swiggy. Great for food bloggers and local influencers.",
+    description: "Promote exciting summer food deals on Swiggy...",
     location: "Pune",
     budget: "₹10,000",
     platforms: ["instagram", "tiktok"],
+    website: "https://www.swiggy.com/",
   },
 ];
 
@@ -88,17 +90,21 @@ const Card = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"active" | "previous">("active");
   const [visibleCount, setVisibleCount] = useState<number>(3);
-  const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
-  const dropdownRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [likedCampaigns, setLikedCampaigns] = useState<number[]>([]); 
 
   const handleTabChange = (tab: "active" | "previous") => {
     setActiveTab(tab);
     setVisibleCount(3);
-    setOpenDropdownId(null);
   };
 
   const handleSeeMore = () => setVisibleCount(sampleCampaigns.length);
   const handleSeeLess = () => setVisibleCount(3);
+
+  const toggleLike = (id: number) => {
+    setLikedCampaigns((prev) =>
+      prev.includes(id) ? prev.filter((cid) => cid !== id) : [...prev, id]
+    );
+  };
 
   const campaignsToShow =
     activeTab === "active"
@@ -113,34 +119,12 @@ const Card = () => {
       facebook: "https://cdn-icons-png.flaticon.com/512/1384/1384053.png",
     };
 
-    return platforms.map(
-      (platform) =>
-        iconMap[platform] && (
-          <img
-            key={platform}
-            src={iconMap[platform]}
-            alt={platform}
-            className="w-3 h-3"
-          />
-        )
+    return platforms.map((platform) =>
+      iconMap[platform] ? (
+        <img key={platform} src={iconMap[platform]} alt={platform} className="w-3 h-3" />
+      ) : null
     );
   };
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        openDropdownId !== null &&
-        dropdownRefs.current[openDropdownId] &&
-        !dropdownRefs.current[openDropdownId]!.contains(event.target as Node)
-      ) {
-        setOpenDropdownId(null);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [openDropdownId]);
 
   return (
     <div className="max-w-4xl mx-auto mt-8 px-4">
@@ -149,9 +133,7 @@ const Card = () => {
         <button
           onClick={() => handleTabChange("active")}
           className={`px-3 cursor-pointer py-1.5 ${
-            activeTab === "active"
-              ? "border-b-2 border-black text-black"
-              : "text-gray-500"
+            activeTab === "active" ? "border-b-2 border-black text-black" : "text-gray-500"
           }`}
         >
           Active Campaigns
@@ -159,99 +141,60 @@ const Card = () => {
         <button
           onClick={() => handleTabChange("previous")}
           className={`px-3 cursor-pointer py-1.5 ${
-            activeTab === "previous"
-              ? "border-b-2 border-black text-black"
-              : "text-gray-500"
+            activeTab === "previous" ? "border-b-2 border-black text-black" : "text-gray-500"
           }`}
         >
           Previous Campaigns
         </button>
       </div>
 
-      {/* Campaign List */}
+      {/* Campaigns */}
       <div className="p-1">
         {campaignsToShow.map((campaign) => (
-          <div
-            key={campaign.id}
-            className="border-b border-gray-300 py-6 relative"
-          >
-            {/* Top-right buttons */}
+          <div key={campaign.id} className="border-b border-gray-300 py-6 relative">
             <div className="absolute right-4 top-4 flex items-center gap-2">
               <button
-                style={{ borderColor: "rgb(120, 61, 145)" }}
+                onClick={() => toggleLike(campaign.id)}
                 className="rounded-2xl cursor-pointer p-2 border"
-                onClick={() =>
-                  setOpenDropdownId((prev) =>
-                    prev === campaign.id ? null : campaign.id
-                  )
-                }
+                style={{ borderColor: "rgb(120, 61, 145)" }}
               >
-                <Heart className="w-3 h-3 text-[rgb(120, 61, 145)]" />
+                <Heart
+                  className="w-3 h-3"
+                  color={likedCampaigns.includes(campaign.id) ? "red" : "rgb(120, 61, 145)"}
+                  fill={likedCampaigns.includes(campaign.id) ? "red" : "none"}
+                />
               </button>
-              <div
-                className="relative"
-                ref={(el) => {
-                  dropdownRefs.current[campaign.id] = el;
-                }}
+              <button
+                type="button"
+                style={{ background: "rgb(120, 61, 145)" }}
+                className="rounded-full text-white px-4 py-1 text-sm font-semibold"
               >
-                <button
-                  type="button"
-                  style={{ background: "rgb(120, 61, 145)" }}
-                  className="rounded-full text-white px-4 py-1 text-sm font-semibold"
-                >
-                  Apply
-                </button>
-
-                {openDropdownId === campaign.id && (
-                  <div className="absolute z-10 top-full right-0 bg-white shadow-md text-sm mt-2 w-40 rounded-md">
-                    <ul>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                        Mark as Complete
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                        Delete Campaign
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                        Other Action
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
+                Apply
+              </button>
             </div>
 
-            {/* Main content */}
-            <p className="text-sm text-gray-400 mb-1">
-              Posted {campaign.time} ago
-            </p>
+            <p className="text-sm text-gray-400 mb-1">Posted {campaign.time} ago</p>
             <a
-              href="#"
+              href={campaign.website}
+              target="_blank"
               style={{ color: "rgb(120 61 145)" }}
               className="text-sm font-semibold flex items-center gap-1"
             >
               {campaign.brandName} <ExternalLink size={14} />
             </a>
-            <h2 className="text-xl font-semibold mt-2">
-              {campaign.campaignName}
-            </h2>
-            <p className="text-sm text-gray-400 mb-2">
-              {campaign.categories.join(", ")}
-            </p>
+            <a href="/influencerhome/apply" className="text-xl font-semibold mt-2">{campaign.campaignName}</a>
+            <p className="text-sm text-gray-400 mb-2">{campaign.categories.join(", ")}</p>
             <p className="text-gray-600 mb-3">{campaign.description}</p>
 
             <div className="flex items-center text-sm gap-4 mb-2 flex-wrap">
               <p>
                 <span className="font-semibold">Location:</span>{" "}
-                <span style={{ color: "rgb(190 177 128)" }}>
-                  {campaign.location}
-                </span>
+                <span style={{ color: "rgb(190 177 128)" }}>{campaign.location}</span>
               </p>
               |
               <p>
                 <span className="font-semibold">Budget:</span>{" "}
-                <span style={{ color: "rgb(190 177 128)" }}>
-                  {campaign.budget}
-                </span>
+                <span style={{ color: "rgb(190 177 128)" }}>{campaign.budget}</span>
               </p>
               |
               <div className="flex items-center gap-3">
@@ -262,21 +205,21 @@ const Card = () => {
           </div>
         ))}
 
-        {/* See More/Less */}
+        {/* See More / See Less */}
         <div className="text-center mt-4">
           {visibleCount < sampleCampaigns.length ? (
             <button
               onClick={handleSeeMore}
+              className="text-sm font-semibold cursor-pointer"
               style={{ color: "rgb(120, 61, 145)" }}
-              className="font-semibold cursor-pointer text-sm"
             >
               See more ↓
             </button>
           ) : (
             <button
               onClick={handleSeeLess}
+              className="text-sm font-semibold cursor-pointer"
               style={{ color: "rgb(120, 61, 145)" }}
-              className="font-semibold cursor-pointer text-sm"
             >
               See less ↑
             </button>
