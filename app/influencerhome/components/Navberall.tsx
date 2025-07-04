@@ -33,7 +33,7 @@ const Navbarall = () => {
         
         <div className="flex items-center space-x-6">
           <Link 
-            href="/influencerhome/findwork" 
+            href="" 
             className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
           >
             Find Work

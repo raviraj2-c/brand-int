@@ -10,9 +10,7 @@ export default function AddProfilePic() {
   const currentStep = 5;
   const router = useRouter();
 
-  useEffect(() => {
-    router.prefetch('/influencersignin/information/Socialmedia');
-  }, [router]);
+
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -139,7 +137,7 @@ export default function AddProfilePic() {
           <div className="mt-6 space-y-2">
             <button
              type="button"
-              onClick={() => router.push('/influencerhome/home')}
+              onClick={() => router.push('/influencerhome/findwork')}
               style={{ background: purple }}
               className="w-full cursor-pointer text-white py-2 rounded-md transition-colors hover:brightness-110"
             >
@@ -147,7 +145,7 @@ export default function AddProfilePic() {
             </button>
             <button
              type="button"
-              onClick={() => router.push('/influencerhome/home')}
+              onClick={() => router.push('/influencerhome/findwork')}
               style={{ color: purple }}
               className="w-full cursor-pointer text-center text-sm transition-colors hover:bg-purple-50"
             >

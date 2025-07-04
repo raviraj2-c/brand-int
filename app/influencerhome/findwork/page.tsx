@@ -32,7 +32,7 @@ const sampleCampaigns: Campaign[] = [
     location: "Mumbai",
     budget: "₹15,000",
     platforms: ["instagram", "youtube"],
-    website: "https://www.nike.com/in",
+    website: "/influencerhome/home",
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ const sampleCampaigns: Campaign[] = [
     location: "Delhi",
     budget: "₹12,000",
     platforms: ["instagram", "tiktok"],
-    website: "https://www.zara.com/in/",
+    website: "/influencerhome/home",
   },
   {
     id: 3,
@@ -58,7 +58,7 @@ const sampleCampaigns: Campaign[] = [
     location: "Bangalore",
     budget: "₹50,000",
     platforms: ["youtube"],
-    website: "https://www.apple.com/in/",
+    website: "/influencerhome/home",
   },
   {
     id: 4,
@@ -71,7 +71,7 @@ const sampleCampaigns: Campaign[] = [
     location: "Hyderabad",
     budget: "₹8,000",
     platforms: ["instagram", "facebook"],
-    website: "https://mamaearth.in/",
+    website: "/influencerhome/home",
   },
   {
     id: 5,
@@ -84,7 +84,7 @@ const sampleCampaigns: Campaign[] = [
     location: "Pune",
     budget: "₹10,000",
     platforms: ["instagram", "tiktok"],
-    website: "https://www.swiggy.com/",
+    website: "/influencerhome/home",
   },
 ];
 
@@ -243,9 +243,8 @@ export default function HomePage() {
 
               <p className="text-sm text-gray-400 mb-1">Posted {campaign.time} ago</p>
               <a
-                href={campaign.website}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/influencerhome/home"
+               
                 className="text-sm font-semibold flex items-center gap-1 text-[rgb(120_61_145)]"
               >
                 {campaign.brandName} <ExternalLink size={14} />

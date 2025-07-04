@@ -19,7 +19,7 @@ const Apply = () => {
       <div className="max-w-5xl mx-auto px-4 py-8">
         <button
           type="button"
-          onClick={() => router.push("/influencerhome/home")}
+          onClick={() => router.push("/influencerhome/findwork")}
           style={{ color: "rgba(120, 60, 145, 1)" }}
           className="text-sm cursor-pointer"
         >
